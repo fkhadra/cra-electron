@@ -1,7 +1,16 @@
 {
-  "name": "sudotron",
-  "version": "0.1.0",
-  "private": true,
+  "name": "cra-electron",
+  "version": "0.0.1",
+  "description": "Create-react-app electron starter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fkhadra/cra-electron.git"
+  },
+  "author": "Fadi Khadra  <fdkhadra@gmail.com> (https://fkhadra.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fkhadra/cra-electron/issues"
+  },
   "main": "public/electron.js",
   "dependencies": {
     "react": "^16.4.2",
