@@ -2,7 +2,7 @@
   "name": "sudotron",
   "version": "0.1.0",
   "private": true,
-  "main": "src/main.js",
+  "main": "public/electron.js",
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -13,7 +13,9 @@
     "start:electron": "cross-env NODE_ENV=development electron .",
     "start": "concurrently -k -p [{name}] -n '🦄 React,⭐️ Electron' -c 'yellow,magenta' 'npm run start:react' 'wait-on http://localhost:3000/ && npm run start:electron'",
     "prettier": "prettier --single-quote --write '*/src/**/*.{js}'",
-    "build": "react-scripts build",
+    "build:react": "react-scripts build",
+    "build:electron": "cross-env NODE_ENV=production electron-builder",
+    "build": "npm run build:react && npm run build:electron",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -21,10 +23,17 @@
     "concurrently": "^4.0.1",
     "cross-env": "^5.2.0",
     "electron": "^3.0.0-beta.7",
+    "electron-builder": "^20.28.3",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
     "prettier": "^1.14.2",
     "wait-on": "^2.1.0"
   },
-  "home": "./"
+  "homepage": "./",
+  "build": {
+    "appId": "com.electron.foobar",
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    }
+  }
 }

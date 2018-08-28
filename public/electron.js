@@ -1,27 +1,28 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron');
+const { format } = require('url');
+const { join } = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 const isDev = process.env.NODE_ENV === 'development';
 
-const gotTheLock = app.requestSingleInstanceLock()
+const gotTheLock = app.requestSingleInstanceLock();
 
 if (!gotTheLock) {
-  app.quit()
+  app.quit();
 } else {
-  app.on('second-instance', (commandLine, workingDirectory) => {
+  app.on('second-instance', () => {
     // Someone tried to run a second instance, we should focus our window.
-    if (myWindow) {
-      if (myWindow.isMinimized()) myWindow.restore()
-      myWindow.focus()
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
     }
-  })
+  });
 
   // Create myWindow, load the rest of the app, etc...
-  app.on('ready', () => {
-  })
+  //app.on('ready', () => {});
 }
 
 function createWindow() {
@@ -30,8 +31,8 @@ function createWindow() {
 
   const startUrl = isDev
     ? 'http://localhost:3000'
-    : url.format({
-        pathname: path.join(__dirname, '/../build/index.html'),
+    : format({
+        pathname: join(__dirname, '/../build/index.html'),
         protocol: 'file:',
         slashes: true
       });
